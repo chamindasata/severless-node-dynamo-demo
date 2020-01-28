@@ -20,7 +20,6 @@ module.exports.list = (event, context, callback) => {
       });
       return;
     }
-
     // create a response
     const response = {
       statusCode: 200,
