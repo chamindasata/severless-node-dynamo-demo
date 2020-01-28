@@ -1,0 +1,13 @@
+version: 0.1
+phases:
+    install:
+        runtime-versions:
+            nodejs: 10
+        commands:
+            - echo Installing source NPM dependencies...
+            - npm install
+            - npm install -g serverless
+    build:
+        commands:
+            - echo Build started on `date`
+            - serverless deploy --stage cicd | tee deploy.out
