@@ -16,10 +16,6 @@ provider:
         - dynamodb:DeleteItem
       Resource: "arn:aws:dynamodb:*:*:*"
       
-package:
-  exclude:
-    - node_modules/**
-
 functions:
   create:
     handler: todos/create.create
