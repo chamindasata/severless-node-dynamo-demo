@@ -6,8 +6,10 @@ phases:
         commands:
             - echo Installing source NPM dependencies...
             - npm install
+            - echo Installing serverless globaly
             - npm install -g serverless
     build:
         commands:
             - echo Build started on `date`
-            - serverless deploy --stage cicd | tee deploy.out
+            - serverless deploy --stage cicd 
+            - echo finished 
