@@ -73,7 +73,7 @@ resources:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
         TableName: todostbl-${opt:stage, self:provider.stage}
-
+    #We are adding the CORS headers to the ApiGatewayRestApi resource in our app
     GatewayResponseDefault4XX:
       Type: "AWS::ApiGateway::GatewayResponse"
       Properties:
