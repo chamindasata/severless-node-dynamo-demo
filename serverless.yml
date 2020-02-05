@@ -38,6 +38,7 @@ functions:
           path: todos
           method: get
           cors: true
+          authorizer: aws_iam
 
   get:
     handler: todos/get.get
