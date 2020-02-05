@@ -20,7 +20,7 @@ custom:
   COGNITO_CLIENT: ${self:service.name}_cognito-client
   COGNITO_IDENTITY_POOL: serverless_static_site_cognito_identity_pool
   COGNITO_APP_AUTH_ROLE: ${self:service.name}_cognito-appAuthRole
-  # COGNITO_APP_UNAUTH_ROLE: ${self:service.name}_cognito-appUnauthRole
+  COGNITO_APP_UNAUTH_ROLE: ${self:service.name}_cognito-appUnauthRole
 
 functions:
   create:
@@ -177,33 +177,33 @@ resources:
                   Action:
                     - "execute-api:Invoke"
                   Resource: "*"
-    # CognitoUnauthRole:
-    #   Type: AWS::IAM::Role
-    #   Properties:
-    #     RoleName: ${self:custom.COGNITO_APP_UNAUTH_ROLE}
-    #     Path: /
-    #     AssumeRolePolicyDocument:
-    #       Version: "2012-10-17"
-    #       Statement:
-    #         - Effect: "Allow"
-    #           Principal:
-    #             Federated: "cognito-identity.amazonaws.com"
-    #           Action:
-    #             - "sts:AssumeRoleWithWebIdentity"
-    #           Condition:
-    #             StringEquals:
-    #               "cognito-identity.amazonaws.com:aud":
-    #                 Ref: CognitoIdentityPool
-    #             "ForAnyValue:StringLike":
-    #               "cognito-identity.amazonaws.com:amr": unauthenticated
-    #     Policies:
-    #       - PolicyName: "CognitoUnauthorizedPolicy"
-    #         PolicyDocument:
-    #           Version: "2012-10-17"
-    #           Statement:
-    #             - Effect: "Allow"
-    #               Action:
-    #                 - "mobileanalytics:PutEvents"
-    #                 - "cognito-sync:*"
-    #                 - "cognito-identity:*"
-    #               Resource: "*"
+    CognitoUnauthRole:
+      Type: AWS::IAM::Role
+      Properties:
+        RoleName: ${self:custom.COGNITO_APP_UNAUTH_ROLE}
+        Path: /
+        AssumeRolePolicyDocument:
+          Version: "2012-10-17"
+          Statement:
+            - Effect: "Allow"
+              Principal:
+                Federated: "cognito-identity.amazonaws.com"
+              Action:
+                - "sts:AssumeRoleWithWebIdentity"
+              Condition:
+                StringEquals:
+                  "cognito-identity.amazonaws.com:aud":
+                    Ref: CognitoIdentityPool
+                "ForAnyValue:StringLike":
+                  "cognito-identity.amazonaws.com:amr": unauthenticated
+        Policies:
+          - PolicyName: "CognitoUnauthorizedPolicy"
+            PolicyDocument:
+              Version: "2012-10-17"
+              Statement:
+                - Effect: "Allow"
+                  Action:
+                    - "mobileanalytics:PutEvents"
+                    - "cognito-sync:*"
+                    - "cognito-identity:*"
+                  Resource: "*"
