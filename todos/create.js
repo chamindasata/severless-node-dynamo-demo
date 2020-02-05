@@ -1,7 +1,7 @@
 "use strict";
 
 const uuid = require("uuid");
-const AWS = require("aws-sdk"); 
+const AWS = require("aws-sdk");
 
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
@@ -45,6 +45,9 @@ module.exports.create = (event, context, callback) => {
     // create a response
     const response = {
       statusCode: 200,
+      headers: {
+        "Access-Control-Allow-Origin": "*"
+      },
       body: JSON.stringify(params.Item)
     };
     callback(null, response);
