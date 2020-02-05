@@ -30,6 +30,7 @@ functions:
           path: todos
           method: post
           cors: true
+          authorizer: aws_iam
 
   list:
     handler: todos/list.list
@@ -55,6 +56,7 @@ functions:
           path: todos/{id}
           method: put
           cors: true
+          authorizer: aws_iam
 
   delete:
     handler: todos/delete.delete
@@ -63,6 +65,7 @@ functions:
           path: todos/{id}
           method: delete
           cors: true
+          authorizer: aws_iam
 
 resources:
   Resources:
